@@ -37,23 +37,23 @@ Vue.use(VueRouter)
             component: Recommend,
           },
           {
-            path: '/songlist',
+            path: '/findmusic/songlist',
             component: SongList,
           },
           {
-            path: '/anchorstation',
+            path: '/findmusic/anchorstation',
             component: AnchorStation,
           },
           {
-            path: '/leaderboard',
+            path: '/findmusic/leaderboard',
             component: LeaderBoard,
           },
           {
-            path: '/singer',
+            path: '/findmusic/singer',
             component: Singer,
           },
           {
-            path: '/latestmusic',
+            path: '/findmusic/latestmusic',
             component: LatestMusic,
           }
         ]

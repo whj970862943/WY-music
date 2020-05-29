@@ -16,3 +16,20 @@ a {
 .router-link-active {
   text-decoration: none;
 }
+
+.el-tabs__item.is-active {
+  color: #C62F2F;
+}
+.el-tabs__active-bar{
+  background-color:#C62F2F;
+}
+.el-tabs__item:hover{
+  color:black
+}
+
+.el-input__inner{
+  border-radius: 14px;
+}
+.el-tabs__nav.is-top {
+  margin-left: 56px;
+}

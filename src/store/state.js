@@ -7,7 +7,13 @@ export default {
   // 当前歌单
   // currentmusiclist:[],
 
-  // 当前播放歌曲url
-  // currentmusicurl:''
+  // 当前播放歌曲信息
+  // currentmusicinfo:{
+  songname:'',
+  singer:'',
+  songurl:'',
+  picurl:'',
+  lrc:''
+  // }
 
 }

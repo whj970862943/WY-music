@@ -5,6 +5,20 @@ export default{
     }
     return state.token
   },
-  
+  getsongname(state){
+    return state.songname
+  },
+  getsinger(state){
+    return state.singer
+  },
+  getsongurl(state){
+    return state.songurl
+  },
+  getpicurl(state){
+    return state.picurl
+  },
+  getlrc(state){
+    return state.lrc
+  }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="songlistdetail">
     <!-- 歌单介绍 -->
     <!-- <div>  -->
       <el-container>
@@ -73,27 +73,59 @@
     <!-- </div> -->
 
     <!-- 歌单列表 -->
-    <el-container class="songlist">
-      sdas
-    </el-container>
+    <div class="songlist">
+      <!-- 标签 -->
+      <div class="tabs">
+        <el-tabs v-model="activeName">
+          <el-tab-pane label="歌曲列表" class="textcolor" name="musiclist">
+            <MusicList :trackIds="this.moremusiclist"></MusicList>
+          </el-tab-pane>
+          <el-tab-pane :label="'评论(' +  this.songlistinfo.commentCount + ')'" name="comment">
+            <Comment></Comment>
+          </el-tab-pane>
+          <el-tab-pane label="收藏者" name="collector">
+            <Collector></Collector>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  // import { mapMutations,mapGetters } from 'vuex'
+  import MusicList from '../../components/SongList/MusicList'
+  import Comment from '../../components/SongList/Comment'
+  import Collector from '../../components/SongList/Collector'
   export default {
     name:'SongListDetail',
+    components:{
+      MusicList,
+      Comment,
+      Collector,
+    },
     data(){
       return{
+        // 音乐列表信息
         songlistinfo:{
           creator:{
             nickname:'',
-            avatarUrl:''
-          }
+            avatarUrl:'',
+          },
+          
         },
         tags:[],
+        // 简介：
         description:'',
-        fold:true
+        // 折叠箭头
+        fold:true,
+        // 音乐列表
+        musiclist:[],
+        activeName:'musiclist',
+        trackIds:[],
+        // 获取更多音乐数组
+        moremusiclist:[],
+        musicids:[],
+        musicidstr:''
       }
     },
     computed:{
@@ -113,30 +145,37 @@
       },
       foldclass(){
         return this.fold ? 'el-icon-arrow-down' : 'el-icon-arrow-up'
-      }
+      },
     },
     created(){
-
+      this.getSongListInfo()
     },
     mounted(){
-      this.getSongListInfo()
+      
     },
     methods:{
       async getSongListInfo(){
         let id = this.musiclist_id || this.$cookies.get('songlistid')  
         const {data:res} = await this.$http.get('/playlist/detail?id=' + id)
         if(res.code !== 200) return this.$message.error('获取歌单列表失败！')
-        console.log(res.playlist);
+        // console.log(res.playlist);
         this.songlistinfo = res.playlist
-        // this.$cookies.remove('songlistid')
-        console.log(this.songlistinfo.creator);
+        // console.log(this.songlistinfo.creator);
         this.tags = res.playlist.tags
         // console.log(this.tags);
         this.description = res.playlist.description
+        this.trackIds = res.playlist.trackIds        
+        this.trackIds.forEach(item => {         
+          this.musicids.push(item.id)
+        })
+        this.musicidstr = this.musicids.join(',')
+        const {data:ans} = await this.$http.get('/song/detail?ids=' + this.musicidstr)
+        this.moremusiclist = ans.songs
+        // console.log(this.moremusiclist);
       },
       isfold(){
         this.fold = !this.fold
-      }
+      },
     },
   }
 </script>
@@ -211,10 +250,12 @@
         font-size: 15px;
         margin-left: -5px;
       }
+      
     }
-    :hover{
+    .button_play:hover{
       background-color:rgb(182, 34, 34);
     }
+    
     .button_white{
       font-size: 15px;
       border-radius: 6px;
@@ -223,7 +264,7 @@
         margin-left: -5px;
       }
     }
-    :hover{
+    .button_white:hover{
       background-color:rgba(#F5F5F7,0.7);
       color:black;
     }
@@ -245,7 +286,13 @@
 
 .songlist{
   position: absolute;
-  top: 350px;
+  top: 330px;
+  width: 1140px;
+  margin-bottom: 76px;
+  .tabs{
+    width: 1140px;
+    float: left;
+  }
+  
 }
-
 </style>

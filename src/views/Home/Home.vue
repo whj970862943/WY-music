@@ -234,7 +234,7 @@
   left: 0px;
   right: 0px;
   bottom: 0px;
-  height: 70px;
+  height: 90px;
 
   width:100%;
   display: flex;

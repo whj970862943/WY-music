@@ -6,4 +6,13 @@ export default {
   removeStorage(state, value){  // 删除token
     localStorage.removeItem('token');
   },
+
+  // 修改当前播放歌曲
+  changemusic(state, obj){
+    state.songname = obj.songname
+    state.singer = obj.singer
+    state.songurl = obj.murl
+    state.picurl = obj.pic
+    state.lrc = obj.musiclrc
+  }
 }
