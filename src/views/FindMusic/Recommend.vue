@@ -3,8 +3,8 @@
     <!-- 跑马灯 -->
     <div class="carousel">
       <el-carousel :interval="4000" type="card" height="200px">
-        <el-carousel-item v-for="item in carousellist" :key="item.id">
-          <img :src="item.picUrl + '?param=600y600'" >
+        <el-carousel-item v-for="item in carousellist" :key="item.imageUrl">
+          <img :src="item.imageUrl + '?param=514y200'" >
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -73,12 +73,12 @@
       
       // 获取跑马灯歌曲
       async getCarouselList(){
-        const {data:res} = await this.$http.get('/album/newest')
+        const {data:res} = await this.$http.get('/banner')
         if(res.code !== 200){
           return this.$message.error('获取跑马灯歌曲失败')
         } 
-        this.carousellist = res.albums
-        // console.log(this.carouselimagelist);
+        this.carousellist = res.banners
+        console.log(this.carousellist);
         
       },
       // 获取推荐歌单

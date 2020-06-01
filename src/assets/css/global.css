@@ -33,3 +33,6 @@ a {
 .el-tabs__nav.is-top {
   margin-left: 56px;
 }
+.el-card__body {
+  padding: 0 0 0 5px;
+} 

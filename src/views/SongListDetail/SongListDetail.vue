@@ -81,10 +81,10 @@
             <MusicList :trackIds="this.moremusiclist"></MusicList>
           </el-tab-pane>
           <el-tab-pane :label="'评论(' +  this.songlistinfo.commentCount + ')'" name="comment">
-            <Comment></Comment>
+            <Comment :musiclistid="this.musiclist_id"></Comment>
           </el-tab-pane>
           <el-tab-pane label="收藏者" name="collector">
-            <Collector></Collector>
+            <Collector :musiclistid="this.musiclist_id"></Collector>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -158,7 +158,7 @@
         let id = this.musiclist_id || this.$cookies.get('songlistid')  
         const {data:res} = await this.$http.get('/playlist/detail?id=' + id)
         if(res.code !== 200) return this.$message.error('获取歌单列表失败！')
-        // console.log(res.playlist);
+        console.log(res);
         this.songlistinfo = res.playlist
         // console.log(this.songlistinfo.creator);
         this.tags = res.playlist.tags
@@ -288,7 +288,7 @@
   position: absolute;
   top: 330px;
   width: 1140px;
-  margin-bottom: 76px;
+  margin-bottom: 90px;
   .tabs{
     width: 1140px;
     float: left;
