@@ -14,6 +14,7 @@ const LeaderBoard = () => import('../views/FindMusic/LeaderBoard.vue')
 const Singer = () => import('../views/FindMusic/Singer.vue')
 const LatestMusic = () => import('../views/FindMusic/LatestMusic.vue')
 const SongListDetail = () => import('../views/SongListDetail/SongListDetail.vue')
+const CurrentMvDetail = () => import('../views/CurrentMvDetail/CurrentMvDetail.vue')
 
 Vue.use(VueRouter)
 
@@ -78,6 +79,11 @@ Vue.use(VueRouter)
         path: '/songlistdetail',
         name: 'songlistdetail',
         component: SongListDetail,
+      },
+      {       
+        path: '/currentmvdetail',
+        name: 'currentmvdetail',
+        component: CurrentMvDetail,
       }
     ]
   }

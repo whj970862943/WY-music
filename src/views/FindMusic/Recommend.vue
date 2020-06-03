@@ -3,6 +3,7 @@
     <!-- 跑马灯 -->
     <div class="carousel">
       <el-carousel :interval="4000" type="card" height="200px">
+        <!-- targetType: 1004为MV，1为歌曲，3000为广告 -->
         <el-carousel-item v-for="item in carousellist" :key="item.imageUrl">
           <img :src="item.imageUrl + '?param=514y200'" >
         </el-carousel-item>
@@ -30,11 +31,15 @@
       <span class="font_list">独家放送</span>
       <div class="under_line"></div>
       <div class="tuijian">
-        <li v-for="item in exclusivebroadcastlist" :key="item.id">
+        <router-link v-for="item in exclusivebroadcastlist" :key="item.id"
+        :to="{
+            name:'currentmvdetail', 
+            params:{currentmv_id:item.id}
+          }" @click.native="addcurrentmvid(item.id)">
           <SongList :musicimg="item.sPicUrl + '?param=335y200'" 
             :musicabstract="item.name"
           ></SongList>
-        </li>
+        </router-link>
       </div>
     </div>
   </div>
@@ -78,7 +83,7 @@
           return this.$message.error('获取跑马灯歌曲失败')
         } 
         this.carousellist = res.banners
-        console.log(this.carousellist);
+        // console.log(this.carousellist);
         
       },
       // 获取推荐歌单
@@ -96,11 +101,15 @@
           return this.$message.error('获取独家放送失败')
         }
         this.exclusivebroadcastlist = res.result
+        console.log(this.exclusivebroadcastlist);
+        
       },
       // 将歌单ID存到session中
       addsonglistid(id){
         this.$cookies.set('songlistid',id)
-        
+      },
+      addcurrentmvid(id){
+        this.$cookies.set('currentmvid',id)
       }
     }
   }
@@ -143,6 +152,7 @@
     width: 1044px;
     justify-content:space-between;
     flex-wrap:wrap;
+    cursor: pointer;
   }
 }
 

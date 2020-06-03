@@ -9,6 +9,8 @@ import './assets/css/global.css'
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 
+// import VideoPlayer from 'vue-video-player'
+// Vue.use(VideoPlayer);
 
 import axios from 'axios'
 axios.defaults.baseURL = '/api'

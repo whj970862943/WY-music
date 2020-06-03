@@ -1,5 +1,6 @@
 <template>
   <div class="comment">
+    
     <div class="pinglun">
       <el-input
         class="input"
@@ -9,6 +10,7 @@
       </el-input>
       <el-button class="pinglunbutton" size="mini">评论</el-button>
     </div>
+    
     
     <div class="plcontent">
       <span class="text">最新评论</span>
@@ -44,11 +46,7 @@
               </el-col>
             </div>
           </el-main>
-        </el-container>
-        
-          
-        
-        
+        </el-container> 
       </el-card>
 
       <!-- 评论分页 -->
